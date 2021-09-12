@@ -1,0 +1,195 @@
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: darkslategray;
+            font-size: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        a {
+            text-decoration: none;
+            color: darkslategray
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .headerdiv {
+            display: flex;
+            flex-direction: column;
+            margin-top: 2%;
+        }
+        
+        .menu {
+            display: inline-flex;
+        }
+        
+        #date {
+            margin-right: 40%;
+            margin-left: 5%;
+            width: 25%
+        }
+        
+        .date {
+            margin-left: 10%;
+        }
+        
+        #dateentry {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            /* background-color: black; */
+        }
+        
+        .connection {
+            margin: 0 5% 5% 0;
+            text-transform: uppercase;
+        }
+        
+        .darklight {
+            height: 30px;
+            width: 40px;
+        }
+        
+        .bodydark {
+            background-color: #000000;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23726c7c' fill-opacity='0.4'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .bodylight {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='%23ece6e6' fill-opacity='0.86'%3E%3Cpolygon fill-rule='evenodd' points='8 4 12 6 8 8 6 12 4 8 0 6 4 4 6 0 8 4'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        /* The switch - the box around the slider */
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        /* Hide default HTML checkbox */
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        /* The slider */
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        
+        input:checked+.slider {
+            background-color: darkslategray;
+        }
+        
+        input:focus+.slider {
+            box-shadow: 0 0 1px darkslategray;
+        }
+        
+        input:checked+.slider:before {
+            -webkit-transform: translateX(24px);
+            -ms-transform: translateX(24px);
+            transform: translateX(24px);
+        }
+        /* Rounded sliders */
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        /* Rounded sliders */
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+        #maindiv {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .frameimage {
+            margin-top: 2%;
+            align-content: flex-start;
+            margin-left: 3%;
+            margin-right: 3%;
+            min-width: 250px;
+            max-width: 600px;
+            height: min-content;
+            color: whitesmoke;
+            background-color: darkslategray;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 8px 8px 2px 1px rgb(103, 139, 139);
+        }
+        
+        .nameimage {
+            font-size: larger;
+        }
+        
+        .imagenasa {
+            width: 100%;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+        
+        .texte {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: medium;
+            font-weight: lighter;
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+        
+        .likebutton {
+            margin-left: 80%;
+            margin-bottom: 2%;
+            width: 11%;
+            padding-top: 1%;
+            padding-left: 1%;
+            padding-right: 1%;
+            background-color: whitesmoke;
+            color: darkslategray;
+            border-radius: 2px;
+            text-align: center;
+            box-shadow: 3px 3px 2px 1px rgb(103, 139, 139);
+        }

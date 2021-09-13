@@ -2,6 +2,7 @@ let nasa = document.getElementById('bodynasa')
 let main = document.getElementById('maindiv')
 let dateentry = document.getElementById('dateentry').value;
 let dateentrydiv = document.getElementById('dateentry');
+let header = document.getElementById('header')
 
 window.onload = () => {
     let dates = []
@@ -32,21 +33,51 @@ dateentrydiv.oninput = () => {
     }
 }
 
-function hdphoto(imgsrc) {
+function hdphoto(imgsrc, date, status) {
     // il faut cacher en dessou centrer relatif a la taille
     let framebiggerimage = document.createElement("div")
     let biggerImage = document.createElement("img")
-    biggerImage.src = imgsrc
-    console.log(window.innerWidth)
-    biggerImage.style.maxWidth = `${80}%`
-    framebiggerimage.style.zIndex = "99"
-    framebiggerimage.style.position = "absolute"
-    framebiggerimage.style.margin = "10%"
-    nasa.append(framebiggerimage)
-    framebiggerimage.append(biggerImage)
-    console.log("ds hd photo")
+    if (status == true) {
 
+        biggerImage.src = imgsrc
+        biggerImage.style.maxWidth = `${window.screen.width}px`
+        biggerImage.style.maxHeight = `${window.screen.height}px`
+        framebiggerimage.style.zIndex = "99"
+        framebiggerimage.style.position = "fixed"
+        framebiggerimage.id = "framebiggerimage"
+        framebiggerimage.style.display = "block";
+        framebiggerimage.style.alignSelf = "center"
+
+        biggerImage.addEventListener('click', function() {
+            hdphoto(imgsrc, date, false)
+        })
+
+        nasa.append(framebiggerimage)
+        for (i = 0; i < document.getElementsByClassName("frameimage").length; i++) {
+            document.getElementsByClassName("frameimage")[i].style.visibility = 'hidden'
+        }
+        framebiggerimage.append(biggerImage)
+        header.style.backgroundColor = "rgb(103, 139, 139)"
+        header.style.opacity = "0.5"
+        main.style.backgroundColor = "rgb(103, 139, 139)"
+        main.style.opacity = "0.5"
+
+    }
+    if (status == false) {
+
+        for (i = 0; i < document.getElementsByClassName("frameimage").length; i++) {
+            document.getElementsByClassName("frameimage")[i].style.visibility = 'visible'
+        }
+
+        document.getElementById("framebiggerimage").remove()
+        header.style.backgroundColor = "white"
+        header.style.opacity = "1"
+        main.style.backgroundColor = "white"
+        main.style.opacity = "1"
+
+    }
 }
+
 
 const showPhoto = (date) => {
 
@@ -56,6 +87,7 @@ const showPhoto = (date) => {
             if (JSON.parse(data)["date"] === date) {
                 console.log(JSON.parse(data)["media_type"])
                 let frameimage = document.createElement("div")
+                frameimage.id = "frameimage" + JSON.parse(data)["date"]
                 frameimage.classList.add('frameimage')
                 main.append(frameimage)
 
@@ -82,10 +114,8 @@ const showPhoto = (date) => {
                 frameimage.append(date)
                 if (JSON.parse(data)["media_type"] === "video") {
                     let video = document.createElement('video')
-                    let sourcevideo = document.createElement("source");
-                    sourcevideo.type = "video/mp4";
-                    sourcevideo.src = JSON.parse(data)["url"];
-                    sourcevideo.autoplay = true;
+                    let sourcevideo = document.createElement("iframe");
+                    sourcevideo.src = JSON.parse(data)["url"]
                     video.append(sourcevideo)
                     video.classList.add('imagenasa')
                     frameimage.append(video)
@@ -95,16 +125,16 @@ const showPhoto = (date) => {
                     image.classList.add('imagenasa')
                     frameimage.append(image)
                     image.addEventListener('click', function() {
-                        hdphoto(JSON.parse(data)["hdurl"])
+                        hdphoto(JSON.parse(data)["hdurl"], JSON.parse(data)["date"], true)
                     })
                 }
                 frameimage.append(explanation)
-
+                console.log(JSON.parse(localStorage.getItem('likeuserlist')).length)
                 likebutton.addEventListener('click', function() {
                     likeUnlike(JSON.parse(data)["date"])
                 })
-                for (i = 0; i < likeuser.length; i++) {
-                    if (likeuser[i] == JSON.parse(data)["date"]) {
+                for (i = 0; i < JSON.parse(localStorage.getItem('likeuserlist')).length; i++) {
+                    if (JSON.parse(localStorage.getItem('likeuserlist'))[i] == JSON.parse(data)["date"]) {
                         likebutton.innerText = "UNLIKE"
                         likebutton.style.transform = "translateX(3px)"
                         likebutton.style.transform = "translateY(3px)"
@@ -116,6 +146,9 @@ const showPhoto = (date) => {
         })
 }
 let likeuser = []
+
+//comment faire poru garder les info des like dans javascript?
+//localstoda json.strignify
 
 const likeUnlike = (date) => {
     let like = document.getElementById('likebutton' + date)
@@ -139,6 +172,7 @@ const likeUnlike = (date) => {
         }
         console.log('dans unlike' + likeuser)
     }
+    localStorage.setItem('likeuserlist', JSON.stringify(likeuser))
 }
 
 let togglemode = document.getElementById('accept')

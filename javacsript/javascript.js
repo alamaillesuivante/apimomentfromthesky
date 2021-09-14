@@ -74,9 +74,10 @@ function hdphoto(imgsrc, date, status) {
         }
 
         document.getElementById("framebiggerimage").remove();
-        header.style.backgroundColor = "white";
+
+        header.style.background = "none";
         header.style.opacity = "1";
-        main.style.backgroundColor = "white";
+        main.style.background = "none";
         main.style.opacity = "1";
 
     }
